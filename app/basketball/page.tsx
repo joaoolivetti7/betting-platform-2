@@ -46,19 +46,16 @@ export default function Bets() {
   useEffect(() => {
     const fetchBets = async () => {
       try {
-        const response = await axios.get(
-          `${API_URL}/soccer_brazil_campeonato/odds`,
-          {
-            params: {
-              apiKey: API_KEY,
-              regions: "us",
-              oddsFormat: "decimal",
-              markets: "h2h",
-              dateFormat: "iso",
-              includeLinks: true,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/basketball/odds`, {
+          params: {
+            apiKey: API_KEY,
+            regions: "us",
+            oddsFormat: "decimal",
+            markets: "spreads",
+            dateFormat: "iso",
+            includeLinks: true,
+          },
+        });
         setBets(response.data);
       } catch (err: unknown) {
         if (axios.isAxiosError(err)) {
@@ -81,7 +78,9 @@ export default function Bets() {
   return (
     <div className=" white py-8 flex items-center justify-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-white mb-6">Bets Favoritas</h1>
+        <h1 className="text-3xl font-bold text-white mb-6">
+          Apostas de Basquete
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading
             ? Array(9)
@@ -98,7 +97,7 @@ export default function Bets() {
                       <Skeleton className="h-4 w-2/3 bg-[#08426434]" />
                     </CardContent>
                     <CardFooter>
-                      <Skeleton className="h-10 w-100 bg-[#08426434]" />
+                      <Skeleton className="h-10 w-100" />
                     </CardFooter>
                   </Card>
                 ))
